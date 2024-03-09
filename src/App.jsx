@@ -10,6 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import ScrollTriggerProxy from "./components/ScrollTriggerProxy";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import logo from "./assets/logo.svg"
 import { motion } from "framer-motion";
 // import {
 //   About,
@@ -50,7 +51,27 @@ const App = () => {
 
           <main className="App" data-scroll-container ref={containerRef}>
      <Home/>
-     <div className="h-[100vh] w-[100vw]"></div>
+     <marquee behavior="smooth" direction="right" className=" bg-slate-300 text-black flex">
+<div className="flex items-center justify-center">
+
+     <div className="flex mx-10">
+      <p className="text-[7vw] mx-10"> EXPLORE OUR WORK </p>
+      <img src={logo} className="w-auto " alt="" />
+     </div>
+     <div className="flex mx-10">
+      <p className="text-[7vw] mx-10"> EXPLORE OUR WORK </p>
+      <img src={logo} className="w-auto " alt="" />
+     </div>
+     <div className="flex mx-10">
+      <p className="text-[7vw] mx-10"> EXPLORE OUR WORK </p>
+      <img src={logo} className="w-auto " alt="" />
+     </div>
+</div>
+     </marquee>
+     <div className="flex ">
+      <div className="uppercase text-orange-500 flex mr-10"> Our Portfolio $nbsp;</div>
+      <div className="">recognizing each game’s uniqueness, we collaborate closely with our partners to deliver truly bespoke gaming experiences</div>
+     </div>
           </main>
         </AnimatePresence>
         </LocomotiveScrollProvider>
