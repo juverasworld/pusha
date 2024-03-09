@@ -1,115 +1,103 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { useState } from "react";
+import styled from "styled-components";
+import { motion } from "framer-motion";
 
-import { styles } from "../styles";
-import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
+const NavContainer = styled(motion.div)`
+  width: 100vw;
+  z-index: 6;
+  position: absolute;
+  top: ${(props) => (props.click ? "0" : `-5rem`)};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.3s ease;
+`;
+
+const MenuItems = styled(motion.ul)`
+  position: relative;
+  height:5rem;
+  background-color:rgba(0, 0, 0, 0.3);
+
+
+  color: #fff;
+  list-style: none;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 100%;
+  padding: 0 10rem;
+`;
+
+const MenuBtn = styled.li`
+  background-color:rgba(0, 0, 0, 0.3);
+  list-style: none;
+  color: ${(props) => props.theme.body};
+  height: 2.5rem;
+  width: 15rem;
+
+  clip-path: polygon(0 0, 100% 0, 30% 450%, 20% 100%);
+
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${(props) => props.theme.fontmd};
+  font-weight: 600;
+  text-transform: uppercase;
+
+  cursor: pointer;
+`;
+
+const MenuItem = styled(motion.li)`
+  text-transform: uppercase;
+  color: ${(props) => props.theme.text};
+`;
+
+
+
 
 const Navbar = () => {
-  const [active, setActive] = useState("");
-  const [toggle, setToggle] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [click, setClick] = useState(false);
 
   return (
-    <nav
-      className={`${
-        styles.paddingX
-      } w-full flex items-center py-5 fixed top-0 z-20 font-syne header view fadein active viewed  mini ${
-        scrolled ? "bg-white" : "bg-transparent"
-      }`}
+    <NavContainer
+      click={click}
+      initial={{
+        y: "-100%",
+      }}
+      animate={{
+        y: 0,
+      }}
+      transition={{
+        duration: 2,
+        delay: 2,
+      }}
     >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        <Link
-          to="/"
-          className="flex items-center gap-2"
-          onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
-          }}
-        >
-          <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
-          <p className="text-white text-[18px] font-bold cursor-pointer flex ">
-            Vera's &nbsp;
-            <span className="lg:block hidden"> | Portfolio</span>
-          </p>
-        </Link>
-
-        <ul className="list-none hidden lg:flex flex-row gap-10">
-          {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${
-                active === nav.title ? "text-white" : "text-black"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
-            >
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="lg:hidden flex flex-1 justify-end items-center">
-          <img
-            src={toggle ? close : menu}
-            alt="menu"
-            className="w-[28px] h-[28px] object-contain"
-            onClick={() => setToggle(!toggle)}
-          />
-
-          <div
-            className={`${
-              !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
-          >
-            <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
-              {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`font-syne font-medium cursor-pointer text-[16px] ${
-                    active === nav.title ? "text-white" : "text-secondary"
-                  }`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
-                >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="text-red-500">
-          <span className="arrow-btn md:mx-0 mx-2">
-            <a href="" className="">
-              Contact Us
-            </a>
-          </span>
-        </div>
-        <div className="md:flex hidden text-red-500">
-          <span className="arrow-btn">
-            <a href="" className="">
-              Reach Us
-            </a>
-          </span>
-        </div>
-      </div>
-    </nav>
+      <MenuItems
+        drag="y"
+        dragConstraints={{
+          top: 0,
+          bottom: 70,
+        }}
+        dragElastic={0.05}
+        dragSnapToOrigin
+      >
+        <MenuBtn onClick={() => setClick(!click)}>Menu</MenuBtn>
+        <MenuItem whileHover={{scale:1.1, y:-5}} whileTap={{scale:0.9, y:0}}>Home</MenuItem>
+        <MenuItem whileHover={{scale:1.1, y:-5}} whileTap={{scale:0.9, y:0}}>About</MenuItem>
+        <MenuItem whileHover={{scale:1.1, y:-5}} whileTap={{scale:0.9, y:0}}>Shop</MenuItem>
+        <MenuItem whileHover={{scale:1.1, y:-5}} whileTap={{scale:0.9, y:0}}>New Arrival</MenuItem>
+      </MenuItems>
+    </NavContainer>
   );
 };
 

@@ -1,14 +1,24 @@
-import React from 'react'
-import CoverVideo from './CoverVideo'
-import Logo from './logo'
+import React from "react";
+import styled from "styled-components";
+import CoverVideo from "../components/CoverVideo";
+import Logo from "../components/Logo";
+import Navbar from "../components/Navbar";
 
-const home = () => {
+const Section = styled.section`
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+`;
+
+const Home = () => {
   return (
-    <div id='main'>
-        <Logo/>
-        <CoverVideo/>
-    </div>
-  )
-}
+    <Section>
+      <CoverVideo />
+      <Logo />
+      <Navbar />
+     
+    </Section>
+  );
+};
 
-export default home
+export default Home;
