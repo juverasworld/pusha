@@ -34,7 +34,6 @@ const Title = styled(motion.div)`
   right: 0;
   left: 0;
   z-index: 5;
-  
 
   display: flex;
   flex-direction: column;
@@ -43,7 +42,6 @@ const Title = styled(motion.div)`
   color: ${(props) => props.theme.text};
 
   div {
-  
   }
 `;
 const Box = styled.div`
@@ -66,13 +64,26 @@ const Round = styled.div`
   right: 90%;
   width: 6rem;
   height: 6rem;
-  background:white;
+  background: white;
+  transition: all ease 0.5s;
   border: 1px solid ${(props) => props.theme.text};
   border-radius: 50%;
+
+  :hover {
+    background-color: orange;
+    transition:all ease-in-out 0.5s;
+  border-radius: 50%;
+  z-index:-1;
+
+  }
   img {
     width: 100%;
     height: auto;
     animation: ${rotate} 6s linear infinite reverse;
+    // :hover {
+    //     background-color: orange;
+    //     transition:all ease 0.5s;
+    //   }
   }
 
   @media (max-width: 64em) {
@@ -81,17 +92,15 @@ const Round = styled.div`
     left: none;
     right: 2rem;
     bottom: 100%;
-  };
+  }
   @media (max-width: 48em) {
-  
     right: 1rem;
-  
   }
 `;
 
 const Circle = styled.span`
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,16 +110,19 @@ const Circle = styled.span`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: black;
+  transition:all ease 0.5s;
+
   color: ${(props) => props.theme.body};
   font-size: ${(props) => props.themefontxl};
 
+//   :hover {
+//     background-color:green;
+//     transition:all ease 0.5s;
+//   };
   @media (max-width: 64em) {
-  width:2rem;
-  height:2rem;
-  font-size: ${(props) => props.themefontlg};
-
-
-  
+    width: 2rem;
+    height: 2rem;
+    font-size: ${(props) => props.themefontlg};
   }
 `;
 const conatiner = {
@@ -166,51 +178,56 @@ const CoverVideo = () => {
           data-scroll-speed="4"
           className="w-[20vw] -mt-[5%] flex justify-start items-start  text-[5vw] font-bold"
         >
-        RELIABLE
+          RELIABLE
         </motion.h1>
 
         <div className="flex flex-col justify-end items-end text-[5vw] font-bold my-4">
-
-        <motion.h2
-          className=""
-          variants={item}
-          data-scroll
-          data-scroll-delay="0.04"
-          data-scroll-speed="2"
-        >
-            
-          GAME 
-        </motion.h2>
-        <motion.h2
-          className="-mt-[4%]"
-          variants={item}
-          data-scroll
-          data-scroll-delay="0.04"
-          data-scroll-speed="2"
-        >
-            
-       DEVELOPMENT
-        </motion.h2>
-        <motion.h2
-          className="-mt-[4%]"
-          variants={item}
-          data-scroll
-          data-scroll-delay="0.04"
-          data-scroll-speed="2"
-        >
-            
-          STUDIO
-        </motion.h2>
+          <motion.h2
+            className=""
+            variants={item}
+            data-scroll
+            data-scroll-delay="0.04"
+            data-scroll-speed="2"
+          >
+            GAME
+          </motion.h2>
+          <motion.h2
+            className="-mt-[4%]"
+            variants={item}
+            data-scroll
+            data-scroll-delay="0.04"
+            data-scroll-speed="2"
+          >
+            DEVELOPMENT
+          </motion.h2>
+          <motion.h2
+            className="-mt-[4%]"
+            variants={item}
+            data-scroll
+            data-scroll-delay="0.04"
+            data-scroll-speed="2"
+          >
+            STUDIO
+          </motion.h2>
         </div>
-      <div className="">
-
-      <Round>
-          <Circle>&#x2193;</Circle>
-          <img src={RoundedTextBlack} alt="NFT" className="" />
-        </Round>
-        <div className="hello">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni nisi facere ea. Minima sapiente delectus repellendus repudiandae, doloribus maxime esse! Porro ea dolore earum inventore dignissimos totam ipsum cum vero?</div>
-      </div>
-
+        <div className="relative  ">
+          <Round>
+            <Circle>&#x2193;</Circle>
+            <img src={RoundedTextBlack} alt="NFT" className="" />
+          </Round>
+          <motion.div
+            variants={item}
+            data-scroll
+            data-scroll-delay="0.04"
+            data-scroll-speed="2"
+            className="relative  "
+          >
+            <div className="hello w-[25vw] absolute left-[12%] bottom-24 text-[14px]">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
+              nisi facere ea. Minima sapiente delectus repellendus repudiandae,{" "}
+            </div>
+          </motion.div>
+        </div>
       </Title>
       <video src={MainVideo} type="video/mp4" autoPlay muted loop />
     </VideoContainer>
